@@ -4,55 +4,57 @@ import { Logo } from "../Logo";
 
 export default function Splash() {
   return (
-    <div className="mesh-bg min-h-screen grid place-items-center px-6">
-      <div className="max-w-xl text-center animate-fade-up">
+    <div className="min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      <div className="max-w-xl text-center animate-pulse sm:animate-none">
+
+        {/* Logo */}
         <div className="flex justify-center mb-8">
           <div className="transition-transform duration-300 hover:scale-105">
             <Logo size="lg" />
           </div>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-display font-extrabold tracking-tighter text-balance mb-5 text-foreground">
+        {/* Heading */}
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-5">
           Welcome to the town square.
         </h1>
 
-        <p className="text-muted-foreground text-lg max-w-md mx-auto mb-10 text-pretty leading-relaxed">
+        {/* Description */}
+        <p className="text-gray-600 text-lg max-w-md mx-auto mb-10 leading-relaxed">
           A safe, smart community for counsel, commerce and classrooms — built
           for Africa, designed for everyone.
         </p>
 
+        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
+
           <Link
             to="/onboarding"
-            className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 active:scale-[0.98] transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 active:scale-[0.98] transition-all duration-200"
           >
-            Get started <ArrowRight className="size-4" />
+            Get started <ArrowRight className="w-4 h-4" />
           </Link>
 
           <Link
             to="/auth/login"
-            className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-secondary text-secondary-foreground font-semibold hover:bg-accent transition-colors duration-200"
+            className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-gray-200 text-gray-900 font-semibold hover:bg-gray-300 transition-colors duration-200"
           >
             I have an account
           </Link>
         </div>
 
-        <p className="text-xs text-muted-foreground mt-12">
+        {/* Footer link */}
+        <p className="text-xs text-gray-500 mt-12">
           Already onboarded?{" "}
           <Link
             to="/home"
-            className="text-foreground font-medium underline-offset-4 hover:underline transition"
+            className="text-gray-900 font-medium underline hover:underline"
           >
             Skip to dashboard
           </Link>
         </p>
+
       </div>
     </div>
   );
 }
-
-
-
-
-
- 
