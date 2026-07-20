@@ -5,7 +5,6 @@ import LiveModal from "../live/live_modal";
 import {
   ArrowLeft,
   Send,
-  Shield,
   Users,
   Wifi,
   WifiOff,
@@ -105,9 +104,7 @@ export default function ChatRoom() {
   const [chatEnabled, setChatEnabled] =
     useState(true);
 
-
-  const [sending, setSending] =
-    useState(false);
+ 
 
 
   const [error, setError] =
@@ -144,8 +141,7 @@ export default function ChatRoom() {
     useState("");
 
 
-  const [checkingLive, setCheckingLive] =
-    useState(false);
+ 
 
 
   const [joiningLive, setJoiningLive] =
@@ -571,7 +567,7 @@ export default function ChatRoom() {
     try{
 
 
-      setCheckingLive(true);
+      
 
 
 
@@ -618,7 +614,7 @@ export default function ChatRoom() {
     }finally{
 
 
-      setCheckingLive(false);
+     
 
 
     }
@@ -1602,144 +1598,147 @@ export default function ChatRoom() {
 
 
 
-      {/* =========================
-          MESSAGE INPUT
-      ========================= */}
 
 
-      <footer className="
-        bg-white
-        border-t
+
+
+
+
+
+
+
+
+
+
+
+
+     {/* =========================
+    MESSAGE INPUT
+========================= */}
+
+<footer className="
+  bg-white
+  border-t
+  p-3
+">
+
+  <div className="
+    flex
+    items-end
+    gap-3
+  ">
+
+    <textarea
+
+      value={message}
+
+      onChange={(e)=>{
+
+        setMessage(
+          e.target.value
+        );
+
+        if(error)
+          setError("");
+
+      }}
+
+
+      onKeyDown={(e)=>{
+
+        if(
+          e.key === "Enter" &&
+          !e.shiftKey
+        ){
+
+          e.preventDefault();
+
+          if(
+            connected &&
+            chatEnabled
+          ){
+
+            sendMessage();
+
+          }
+
+        }
+
+      }}
+
+
+      rows={1}
+
+
+      placeholder={
+        chatEnabled
+        ?
+        "Type message..."
+        :
+        "Chat disabled"
+      }
+
+
+      disabled={
+        !chatEnabled
+      }
+
+
+      className="
+        flex-1
+        resize-none
+        rounded-xl
+        border
+        px-4
+        py-3
+        outline-none
+        focus:ring-2
+        focus:ring-blue-200
+      "
+
+    />
+
+
+
+
+
+    <button
+
+      onClick={sendMessage}
+
+
+      disabled={
+        !message.trim() ||
+        !chatEnabled
+      }
+
+
+      title="Send message"
+
+
+      className="
         p-3
-      ">
+        rounded-xl
+        bg-blue-600
+        text-white
+        hover:bg-blue-700
+        disabled:bg-gray-300
+      "
 
+    >
 
-        <div className="
-          flex
-          items-end
-          gap-3
-        ">
+      <Send
+        className="h-5 w-5"
+      />
 
-
-
-          <textarea
-
-            value={message}
-
-            onChange={(e)=>{
-
-              setMessage(
-                e.target.value
-              );
-
-              if(error)
-                setError("");
-
-            }}
-
-
-            onKeyDown={(e)=>{
-
-              if(
-                e.key === "Enter" &&
-                !e.shiftKey
-              ){
-
-                e.preventDefault();
-
-                if(
-                  connected &&
-                  chatEnabled &&
-                  !sending
-                ){
-
-                  sendMessage();
-
-                }
-
-              }
-
-            }}
-
-
-            rows={1}
-
-            placeholder={
-              !connected
-              ?
-              "Connecting..."
-              :
-              chatEnabled
-              ?
-              "Type message..."
-              :
-              "Chat disabled"
-            }
-
-
-            disabled={
-              !connected ||
-              !chatEnabled ||
-              sending
-            }
-
-
-            className="
-              flex-1
-              resize-none
-              rounded-xl
-              border
-              px-4
-              py-3
-              outline-none
-              focus:ring-2
-              focus:ring-blue-200
-            "
-
-          />
+    </button>
 
 
 
+  </div>
 
 
-          <button
-
-            onClick={sendMessage}
-
-            disabled={
-              !message.trim() ||
-              !connected ||
-              !chatEnabled ||
-              sending
-            }
-
-
-            title="Send message"
-
-
-            className="
-              p-3
-              rounded-xl
-              bg-blue-600
-              text-white
-              hover:bg-blue-700
-              disabled:bg-gray-300
-            "
-
-          >
-
-            <Send
-              className="h-5 w-5"
-            />
-
-          </button>
-
-
-
-        </div>
-
-
-      </footer>
+</footer>
 
 
 
